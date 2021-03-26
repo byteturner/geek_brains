@@ -1,17 +1,34 @@
 use vk
 
-alter table friendship
-    add constraint friendship_fk_status_id
-        foreign key (status_id) references friendship_statuses (id) on delete cascade,
-    add constraint friendship_fk_user_id
-        foreign key (user_id) references users (id) on delete cascade;
+ALTER TABLE profiles
+    ADD CONSTRAINT profiles_fk_user_id FOREIGN KEY (user_id) REFERENCES users (id),
+    ADD CONSTRAINT profiles_fk_gender_id FOREIGN KEY (gender_id) REFERENCES gender (id),
+    ADD CONSTRAINT profiles_fk_user_status_id FOREIGN KEY (user_status_id) REFERENCES user_statuses (id),
+    ADD CONSTRAINT profiles_fk_photo_id FOREIGN KEY (photo_id) REFERENCES media (id);
 
+ALTER TABLE communities_users
+    ADD CONSTRAINT communities_users_fk_user_id FOREIGN KEY (user_id) REFERENCES users (id),
+    ADD CONSTRAINT communities_users_fk_community_id FOREIGN KEY (community_id) REFERENCES communities (id);
 
-alter table likes
-    add constraint likes_fk_target_type_id
-        foreign key (target_type_id) references target_types (id) on delete cascade,
-    add constraint likes_fk_user_id
-        foreign key (user_id) references users (id) on delete cascade;
+ALTER TABLE friendship
+    ADD CONSTRAINT friendship_fk_user_id FOREIGN KEY (user_id) REFERENCES users (id),
+    ADD CONSTRAINT friendship_fk_friend_id FOREIGN KEY (friend_id) REFERENCES users (id),
+    ADD CONSTRAINT friendship_fk_status_id FOREIGN KEY (status_id) REFERENCES friendship_statuses (id);
+
+ALTER TABLE media
+    ADD CONSTRAINT media_fk_user_id FOREIGN KEY (user_id) REFERENCES users (id),
+    ADD CONSTRAINT media_fk_media_type_id FOREIGN KEY (media_type_id) REFERENCES media_types (id);
+
+ALTER TABLE messages
+    ADD CONSTRAINT messages_fk_from_user_id FOREIGN KEY (from_user_id) REFERENCES users (id),
+    ADD CONSTRAINT messages_fk_to_user_id FOREIGN KEY (to_user_id) REFERENCES users (id);
+
+ALTER TABLE likes
+    ADD CONSTRAINT likes_fk_user_id FOREIGN KEY (user_id) REFERENCES users (id),
+    ADD CONSTRAINT likes_fk_target_type_id FOREIGN KEY (target_type_id) REFERENCES target_types (id);
+
+ALTER TABLE posts
+    ADD CONSTRAINT posts_fk_user_id FOREIGN KEY (user_id) REFERENCES users (id);
 
 # Определить кто больше поставил лайков (всего) - мужчины или женщины?
 select count(l.id) as total_likes, g2.gender as user_gender
