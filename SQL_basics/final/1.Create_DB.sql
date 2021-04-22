@@ -121,8 +121,7 @@ ALTER TABLE `user_favourite_movie`
 ALTER TABLE `user_favourite_movie`
     ADD CONSTRAINT `user_favourite_movie_fk1` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`id`);
 
-DELIMITER
-//
+DELIMITER //
 
 CREATE TRIGGER `create_profile`
     AFTER INSERT
@@ -130,6 +129,6 @@ CREATE TRIGGER `create_profile`
     FOR EACH ROW
 BEGIN
     INSERT INTO `profile` (user_id) VALUES (NEW.id);
-END//
+END //
 
-DELIMITER;
+DELIMITER ;
