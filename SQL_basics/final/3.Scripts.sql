@@ -1,7 +1,6 @@
 USE kinopoisk;
 
 -- Поиск списка актеров по названию фильмов
--- Поиск списка актеров по названию фильмов
 SELECT a.name, a.last_name, a.year_birth
 FROM `actor` a
          JOIN `actor_in_movie` am ON a.id = am.actor_id
