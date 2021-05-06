@@ -1,0 +1,4 @@
+Johnson 10.000
+Robson 30.000
+Clark 45.000
+Lightman 15.000
