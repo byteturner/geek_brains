@@ -5,7 +5,7 @@
 
 from sys import argv
 
-scrip_name, work_hours, pay_per_hour, bonus = argv
+scrip_name, int(work_hours), int(pay_per_hour), int(bonus) = argv
 print((work_hours * pay_per_hour) + bonus)
 #
 # 2. Представлен список чисел. Необходимо вывести элементы исходного списка, значения которых больше предыдущего элемента.
